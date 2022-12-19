@@ -1,4 +1,7 @@
 #!/bin/sh
 nitrogen --restore
-picom &
+picom --experimental-backends &
+dunst &
+lxsession &
+redshift &
 ~/.config/polybar/launch.sh
