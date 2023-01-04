@@ -1,7 +1,68 @@
+#+TITLE: Dotfiles
+#+PROPERTY: header-args :tangle qtile/.config/qtile/config.py
+Dotfiles <3
+[[1.png]]
+[[2.png]]
+
+* TABLE OF CONTENT :toc:
+- [[#about-the-config][About The Config]]
+- [[#dependencies][Dependencies]]
+  - [[#required][Required]]
+  - [[#optional][Optional]]
+- [[#setup][Setup]]
+- [[#my-qtile-config][My Qtile Config]]
+  - [[#imports][Imports]]
+  - [[#application--group-names][Application & Group Names]]
+  - [[#keybindings][KeyBindings]]
+  - [[#layouts][Layouts]]
+  - [[#multiple-screens][Multiple Screens]]
+  - [[#mouse--floating-windows][Mouse & Floating Windows]]
+  - [[#some-window-variables][Some Window variables]]
+  - [[#autostart-configurations][Autostart Configurations]]
+  - [[#installing-stow][Installing Stow]]
+
+* About The Config
+These config are meant for my personal use and for those who want to learn ricing or want to take inspiraiion from my config.
+I am using Qtile with Polybar.
+* Dependencies
+** Required
++ Qtile
++ Polybar
++ Nerd-fonts-complete
++ Picom
+** Optional
++ Alacritty (My Current Terminal Emulator)
++ Fish (Yes I am Vegan Fish Lover.)
++ Redshift (Com'on man give your eyes a rest)
++ Nitrogen (Wallpaper Utility)
++ Flameshot (You want to take screenshot right ?)
++ Lxsession (A session manager You need a one)
+* Setup
+First install required packages (Using your package manager.)
+
+git clone https://github.com/Sigma-Coder777/dotfiles
+mv dotfiles ~/
+cd ~/dotfiles
+stow */ --adopt
+
+
+Everything shauld be done now
+Just login into Qtile.
+* My Qtile Config
+** Imports
+No Explanation Cry about it.
+#+begin_src python
+
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 import os, subprocess
+
+#+end_src
+** Application & Group Names
+Here I initialise some variable like my default browser, terminal and Group/Workspace Names
+#+begin_src python
+
 
 mod = "mod4"
 
@@ -18,6 +79,13 @@ start_always ='~/.config/qtile/autostart.sh'
 #Un-Comment the hook at the last of this file
 start_once = ""
 group_names = '   ﭮ   祥 '.split()
+#+end_src
+** KeyBindings
+Do I realy need to explain what are Keybindings.
+Don't worry boy comments are available after each line :D
+Customize these according to your needs.
+#+begin_src python
+
 
 keys = [
 
@@ -109,6 +177,45 @@ for i, name in enumerate(group_names):
         Key([mod, 'shift'], indx, lazy.window.togroup(name))
     ]
 
+#+end_src
+** Layouts
+According to me these three will fullfill most of the homosapiens need.
+#+begin_src python
+
+
+layouts = [
+    layout.MonadTall(border_focus="#ADD8E6",border_width=2,margin=7),
+    layout.Floating(border_focus="#ADD8E6"),
+    layout.Max()
+    ]
+floating_layout = layout.Floating(
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ]
+)
+
+#+end_src.
+** Multiple Screens
+Add your Screens If you are using any multimonitor setup.
+My Second Screen is broken :(
+#+begin_src python
+
+screens = [
+    Screen()
+]
+#+end_src`
+** Mouse & Floating Windows
+Most probably you want to change these
+mod key + left click does everything in my case
+#+begin_src python
+
 mouse = [
     Drag([mod], "Button1",
          lazy.window.set_position_floating(),
@@ -119,6 +226,15 @@ mouse = [
     Click([mod], "Button1",
           lazy.window.bring_to_front()),
 ]
+
+#+end_src
+
+
+
+** Some Window variables
+Comments are present wherever needed.
+#+begin_src python
+
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
@@ -137,3 +253,35 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 wmname = "LG3D"
+
+#+end_src
+
+** Autostart Configurations
+Un Comment startup once hook if you want to launch some apps on start up present in start_once variable.
+#+begin_src python
+
+@hook.subscribe.startup
+def autostart():
+    home = os.path.expanduser(start_always)
+    subprocess.Popen([home])
+
+#Un-Comment this if you are using start up once script
+"""
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser(start_once)
+    subprocess.Popen([home])
+
+"""
+#+end_src** How To Setup
+Warning :- Before Blindly Following these steps make backup of your configs. In case you messed up something I wauld not be responsible.
+
+The FIle Structure is designed in such a way you can get the whole setup with one single command
+** Installing Stow
+Stow is the tool to create symlinks
+*** Arch Linux
+sudo pacman -S stow
+*** Ubuntu/Debian Based
+sudo apt install stow
+*** Fedora/RHEL Based
+sudo dnf install stow
