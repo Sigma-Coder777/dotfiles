@@ -10,6 +10,8 @@ Dotfiles <3
   - [[#required][Required]]
   - [[#optional][Optional]]
 - [[#setup][Setup]]
+  - [[#installing-stow][Installing Stow]]
+  - [[#placing-files-in-correct-location][Placing files in correct location]]
 - [[#my-qtile-config][My Qtile Config]]
   - [[#imports][Imports]]
   - [[#application--group-names][Application & Group Names]]
@@ -19,7 +21,6 @@ Dotfiles <3
   - [[#mouse--floating-windows][Mouse & Floating Windows]]
   - [[#some-window-variables][Some Window variables]]
   - [[#autostart-configurations][Autostart Configurations]]
-  - [[#installing-stow][Installing Stow]]
 
 * About The Config
 These config are meant for my personal use and for those who want to learn ricing or want to take inspiraiion from my config.
@@ -40,6 +41,15 @@ I am using Qtile with Polybar.
 * Setup
 First install required packages (Using your package manager.)
 
+** Installing Stow
+Stow is the tool to create symlinks
+*** Arch Linux
+sudo pacman -S stow
+*** Ubuntu/Debian Based
+sudo apt install stow
+*** Fedora/RHEL Based
+sudo dnf install stow
+** Placing files in correct location
 git clone https://github.com/Sigma-Coder777/dotfiles
 mv dotfiles ~/
 cd ~/dotfiles
@@ -277,11 +287,3 @@ def autostart():
 Warning :- Before Blindly Following these steps make backup of your configs. In case you messed up something I wauld not be responsible.
 
 The FIle Structure is designed in such a way you can get the whole setup with one single command
-** Installing Stow
-Stow is the tool to create symlinks
-*** Arch Linux
-sudo pacman -S stow
-*** Ubuntu/Debian Based
-sudo apt install stow
-*** Fedora/RHEL Based
-sudo dnf install stow
