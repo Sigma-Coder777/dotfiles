@@ -3,4 +3,5 @@ if status is-interactive
 end
 set fish_greeting
 colorscript random
+starship init fish | source
 
