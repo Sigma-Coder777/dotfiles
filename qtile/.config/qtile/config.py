@@ -109,6 +109,27 @@ for i, name in enumerate(group_names):
         Key([mod, 'shift'], indx, lazy.window.togroup(name))
     ]
 
+layouts = [
+    layout.MonadTall(border_focus="#ADD8E6",border_width=2,margin=7),
+    layout.Floating(border_focus="#ADD8E6"),
+    layout.Max()
+    ]
+floating_layout = layout.Floating(
+    float_rules=[
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ]
+)
+
+screens = [
+    Screen()
+]
+
 mouse = [
     Drag([mod], "Button1",
          lazy.window.set_position_floating(),
@@ -137,3 +158,17 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 wmname = "LG3D"
+
+@hook.subscribe.startup
+def autostart():
+    home = os.path.expanduser(start_always)
+    subprocess.Popen([home])
+
+"""
+# Un-Comment this if you are using start up once script
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser(start_once)
+    subprocess.Popen([home])
+
+"""

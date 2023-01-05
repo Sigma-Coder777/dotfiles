@@ -195,8 +195,6 @@ for i, name in enumerate(group_names):
 ** Layouts
 According to me these three will fullfill most of the homosapiens need.
 #+begin_src python
-
-
 layouts = [
     layout.MonadTall(border_focus="#ADD8E6",border_width=2,margin=7),
     layout.Floating(border_focus="#ADD8E6"),
@@ -204,7 +202,6 @@ layouts = [
     ]
 floating_layout = layout.Floating(
     float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
@@ -214,17 +211,16 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
-
-#+end_src.
+#+end_src
 ** Multiple Screens
 Add your Screens If you are using any multimonitor setup.
 My Second Screen is broken :(
 #+begin_src python
-
 screens = [
     Screen()
 ]
-#+end_src`
+#+end_src
+
 ** Mouse & Floating Windows
 Most probably you want to change these
 mod key + left click does everything in my case
@@ -242,6 +238,7 @@ mouse = [
 ]
 
 #+end_src
+
 
 
 
@@ -279,12 +276,12 @@ def autostart():
     home = os.path.expanduser(start_always)
     subprocess.Popen([home])
 
-#Un-Comment this if you are using start up once script
 """
+# Un-Comment this if you are using start up once script
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser(start_once)
     subprocess.Popen([home])
 
 """
-#+end_src** How To Setup
+#+end_src
