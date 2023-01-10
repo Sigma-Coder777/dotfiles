@@ -5,6 +5,7 @@ dunst &
 ~/.config/polybar/launch.sh 
 lxsession &
 flameshot &
-emacs --daemon &
+/usr/bin/emacs --daemon &
 killall redshift 
 redshift   
+volumeicon &
