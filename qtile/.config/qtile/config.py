@@ -75,7 +75,7 @@ keys = [
     Key([mod, "shift"], "b",
         lazy.spawn(second_browser),
         desc=f"Launch {second_browser}"),
-    Key([mod], "d",
+    Key([mod,"shift"], "d",
         lazy.spawn("rofi -show drun"),
         desc="Launch Rofi"),
     Key([mod], "p",
@@ -89,7 +89,7 @@ keys = [
     Key([mod], "space",
         lazy.next_layout(),
         desc="Toggle between layouts"),
-    Key([mod], "w",
+    Key([mod, "shift"], "c",
         lazy.window.kill(),
         desc="Kill focused window"),
     Key([mod, "control"], "r",
@@ -111,8 +111,18 @@ for i, name in enumerate(group_names):
 
 layouts = [
     layout.MonadTall(border_focus="#ADD8E6",border_width=2,margin=7),
+    layout.Max(),
     layout.Floating(border_focus="#ADD8E6"),
-    layout.Max()
+    #Additional Layouts
+    layout.Stack(num_stacks=2),
+    layout.Bsp(),
+
+    layout.Matrix(),
+
+    layout.RatioTile(),
+
+    layout.Tile(),
+    layout.Zoomy(),
     ]
 floating_layout = layout.Floating(
     float_rules=[

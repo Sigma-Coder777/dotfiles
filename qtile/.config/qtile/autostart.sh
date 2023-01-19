@@ -6,6 +6,4 @@ dunst &
 lxsession &
 flameshot &
 /usr/bin/emacs --daemon &
-killall redshift 
-redshift   
 volumeicon &

@@ -5,3 +5,5 @@ set fish_greeting
 colorscript random
 # Starship prompt
 starship init fish | source
+
+thefuck --alias | source
