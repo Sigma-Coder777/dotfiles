@@ -2,7 +2,6 @@
 #+PROPERTY: header-args :tangle qtile/.config/qtile/config.py
 Dotfiles <3
 [[1.png]]
-[[2.png]]
 
 * TABLE OF CONTENT :toc:
 - [[#about-the-config][About The Config]]
