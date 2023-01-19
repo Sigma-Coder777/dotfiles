@@ -21,6 +21,7 @@ Dotfiles <3
   - [[#mouse--floating-windows][Mouse & Floating Windows]]
   - [[#some-window-variables][Some Window variables]]
   - [[#autostart-configurations][Autostart Configurations]]
+- [[#keybindings-1][Keybindings]]
 
 * About The Config
 These config are meant for my personal use and for those who want to learn ricing or want to take inspiraiion from my config.
@@ -91,7 +92,7 @@ screenshot_tool = "flameshot gui"
 start_always ='~/.config/qtile/autostart.sh'
 #Add the path of the script you want to run only when you login
 #Un-Comment the hook at the last of this file
-start_once = ""
+start_once = "~/.config/qtile/start_once.sh"
 group_names = '   ﭮ   祥 '.split()
 #+end_src
 ** KeyBindings
@@ -199,16 +200,7 @@ layouts = [
     layout.MonadTall(border_focus="#ADD8E6",border_width=2,margin=7),
     layout.Max(),
     layout.Floating(border_focus="#ADD8E6"),
-    #Additional Layouts
-    layout.Stack(num_stacks=2),
-    layout.Bsp(),
-
-    layout.Matrix(),
-
-    layout.RatioTile(),
-
-    layout.Tile(),
-    layout.Zoomy(),
+    layout.Tile(border_focus="#ADD8E6",border_width=2,margin=7),
     ]
 floating_layout = layout.Floating(
     float_rules=[
@@ -278,7 +270,6 @@ wmname = "LG3D"
 #+end_src
 
 ** Autostart Configurations
-Un Comment startup once hook if you want to launch some apps on start up present in start_once variable.
 #+begin_src python
 
 @hook.subscribe.startup
@@ -286,12 +277,23 @@ def autostart():
     home = os.path.expanduser(start_always)
     subprocess.Popen([home])
 
-"""
-# Un-Comment this if you are using start up once script
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser(start_once)
     subprocess.Popen([home])
 
-"""
+
 #+end_src
+* Keybindings
+Super key is the default mod key.
+| Key                           | Action                            |
+| Mod+ Enter                    | Launches Terminal                 |
+| Mod + Shift + c               | Closes Current Window             |
+| Mod + Shift + d               | Launches ROfi                     |
+| Mod + b                       | Launches Browser                  |
+| Mod + Shift + b               | Launches Secondory Browser        |
+| Mod + Ctrl + q/r              | Quits/Restart Qtile               |
+| Mod + Shift + hjkl/arrow keys | Grows the window size             |
+| Mod + Ctrl + hjkl/arrow keys  | Moves the windows in layout       |
+| Mod + 1..8                    | Takes You to the nth workspace    |
+| Mod + SHift + 1..8            | Takes window to the nth workspace |

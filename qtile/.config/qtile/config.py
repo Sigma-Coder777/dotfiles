@@ -16,7 +16,7 @@ screenshot_tool = "flameshot gui"
 start_always ='~/.config/qtile/autostart.sh'
 #Add the path of the script you want to run only when you login
 #Un-Comment the hook at the last of this file
-start_once = ""
+start_once = "~/.config/qtile/start_once.sh"
 group_names = '   ﭮ   祥 '.split()
 
 keys = [
@@ -113,16 +113,7 @@ layouts = [
     layout.MonadTall(border_focus="#ADD8E6",border_width=2,margin=7),
     layout.Max(),
     layout.Floating(border_focus="#ADD8E6"),
-    #Additional Layouts
-    layout.Stack(num_stacks=2),
-    layout.Bsp(),
-
-    layout.Matrix(),
-
-    layout.RatioTile(),
-
-    layout.Tile(),
-    layout.Zoomy(),
+    layout.Tile(border_focus="#ADD8E6",border_width=2,margin=7),
     ]
 floating_layout = layout.Floating(
     float_rules=[
@@ -174,11 +165,7 @@ def autostart():
     home = os.path.expanduser(start_always)
     subprocess.Popen([home])
 
-"""
-# Un-Comment this if you are using start up once script
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser(start_once)
     subprocess.Popen([home])
-
-"""
